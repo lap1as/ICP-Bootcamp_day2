@@ -1,12 +1,19 @@
 <template>
     <div>
-        <h2 class="text-blue-600">All Entries</h2>
-        <button @click="getEnties">Refresh</button>
-        <div v-for="entry in entries">
-            <p>{{ entry }}</p>
+        <h2 class="text-blue-600">Wpisy na bloga:</h2>
+        <div class="w-100 flex flex-row-reverse">
+            <button @click="getEnties" class="bg-blue-600 rounded text-white p-4">Refresh</button>
         </div>
-        <input v-model="newBlog" type="text">
-        <button @click="addEntries">Add Entries</button>
+        <div class="grid mx-6 gap-4 my-4">
+            <div v-for="(entry, index) in entries" class="drop-shadow-xl bg-stone-300 p-4">
+                <p>{{ index }}</p>
+                <p>{{ entry }}</p>               
+            </div>
+        </div>
+        <div class="flex justify-center flex-col">
+            <input v-model="newBlog" class="border-2 border-blue-600 p-4" type="text">
+            <button  class="bg-blue-600 rounded text-white p-4" @click="addEntries">Add</button>
+        </div>
     </div>
 </template>
 
@@ -29,7 +36,7 @@ export default {
         }
     },
     async mounted() {
-        this.addEntries()
+        this.getEnties()
     },
 }
 </script>
