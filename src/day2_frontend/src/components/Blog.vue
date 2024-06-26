@@ -1,8 +1,10 @@
 <template>
     <div>
-        <button @click="getEnties">Get Entries</button>
-        Hi blog!
-        {{ entries }}
+        <h2 class="text-blue-600">All Entries</h2>
+        <button @click="getEnties">Refresh</button>
+        <div v-for="entry in entries">
+            <p>{{ entry }}</p>
+        </div>
         <input v-model="newBlog" type="text">
         <button @click="addEntries">Add Entries</button>
     </div>
@@ -14,7 +16,8 @@ import { day2_backend } from 'declarations/day2_backend/index';
 export default {
     data() {
         return {
-            entries: []
+            entries: [],
+            newBlog: ""
         }
     },
     methods: {
@@ -24,6 +27,9 @@ export default {
         async addEntries(){
             await day2_backend.add_entry(this.newBlog);
         }
+    },
+    async mounted() {
+        this.addEntries()
     },
 }
 </script>
